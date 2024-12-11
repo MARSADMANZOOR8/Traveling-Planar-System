@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        select {
+            padding: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Travel Planner</h1>
+
+    <div class="form-container">
+        <form method="POST" action="/get_route">
+            <label for="start">Starting Location:</label>
+            <select name="start" required>
+                <option value="CityA">CityA</option>
+                <option value="CityB">CityB</option>
+                <option value="CityC">CityC</option>
+                <option value="CityD">CityD</option>
+                <option value="CityE">CityE</option>
+            </select>
+
+            <label for="end">Destination Location:</label>
+            <select name="end" required>
+                <option value="CityA">CityA</option>
+                <option value="CityB">CityB</option>
+                <option value="CityC">CityC</option>
+                <option value="CityD">CityD</option>
+                <option value="CityE">CityE</option>
+            </select>
+
+            <label for="preference">Choose preference:</label>
+            <select name="preference" required>
+                <option value="distance">Distance</option>
+                <option value="time">Time</option>
+                <option value="cost">Cost</option>
+            </select>
+
+            <button type="submit">Find Route</button>
+        </form>
+    </div>
+
+    {% if route %}
+        <div class="result">
+            <h2>Optimal {{ preference }} route:</h2>
+            <p>Route: {{ route | join(' → ') }}</p>
+            <p>Total {{ preference }}: {{ total_cost }}</p>
+        </div>
+    {% endif %}
+
+</body>
+</html>
